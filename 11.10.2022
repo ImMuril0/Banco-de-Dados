@@ -1,1 +1,71 @@
+create database exemploAlter;
+/* Cria banco de dados exemploAlter */
 
+use exemploAlter;
+
+create table cliente(
+nome VARCHAR(30)
+);
+
+describe cliente;
+
+alter table cliente
+add codCli int;
+/* Adiciona atrivuto codCli por último */
+
+describe cliente;
+
+alter table cliente
+add codCli int first;
+/* Adiciona atributo codCli por primeiro */
+
+describe cliente;
+
+alter table cliente
+add primary key(codCli);
+/* Transforma codCli em chave primária */
+
+describe cliente;
+
+create table produto(
+codProd int,
+Descricao VARCHAR(30)
+);
+/* Cria tabela produto */
+
+show tables; /* Mostra as tabelas do banco*/
+
+describe produto;
+
+alter table produto
+add codCliente int;
+/* Adiciona atributo codCliente na tabela produto*/
+
+describe produto;
+
+alter table produto
+add primary key(codProd);
+/* Adiciona chave primaria codProd na tabela Produto */
+
+describe produto;
+
+alter table produto
+add foreign key(codCliente) references cliente(codCli);
+
+describe produto;
+
+alter table produto
+add quant_Prod int after descricao;
+/* Adiciona atributo quant_Prod depois de descricao */
+
+describe produto;
+
+alter table produto
+modify descricao CHAR(50); /* Modifica atributo descrição */
+
+describe produto;
+
+drop database exemploAlter;
+/* Exclui o banco de dados exemploAlter */
+
+show databases;
