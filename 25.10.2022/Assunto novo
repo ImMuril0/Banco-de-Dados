@@ -1,0 +1,86 @@
+create database escola;
+use escola;
+
+create table cursos(
+cod_curso int primary key auto_increment,
+nome varchar(30),
+descricao varchar(50),
+carga_hor int,
+ano int
+);
+
+desc cursos;
+
+insert into cursos /* INSERE DADOS NA TABELA */
+(cod_curso, nome, descricao, carga_hor, ano)
+
+values
+(default,'HTML4', 'cursos de HTMl', '40', '2021');
+
+desc cursos;
+
+select * from cursos; /* Seleciona todos reg tabela */
+
+insert into cursos values
+
+(default, 'Algoritimos', 'Lógica de Programação', '60', '2020'),
+(default, 'Photoshop', 'Photoshop intermediário', '30', '2019'),
+(default, 'Word', 'Edição de textos','90', '2021'),
+(default, 'NOME ERRADO', 'Introdução a Linguagem Java', '80', '2017');
+
+select * from cursos;
+
+/* COMANDO UPDATE - MODIFICAR DADOS NA TABELA */
+
+update cursos
+set nome = 'Java'
+where cod_curso = '5';
+
+select * from cursos;
+
+update cursos
+set nome = 'CorelDraw', descricao = 'Editoração grafica', ano = '2020'
+where cod_curso = '3';
+
+select * from cursos;
+
+update cursos
+set ano = '2089', carga_hor = '700'
+where ano = '2020';
+/* ERRO - UPDATE NÃO SEGURO */
+
+select * from cursos;
+
+update cursos
+set ano = '2089', carga_hor = '700'
+where ano = '2020'
+limit 1;
+
+/* limit 2;  =LIMITAR LINHAS ATUALIZADAS*/
+
+select * from cursos;
+
+delete from cursos
+where cod_curso = '4'; /* Apagar registros */
+
+select * from cursos;
+
+delete from cursos
+where ano = '2089'
+limit 1;
+
+select * from cursos;
+
+insert into cursos
+(cod_curso, nome, descricao, carga_hor, ano)
+
+values
+('4','Excel','Curso de Excel Avançado','60','2021');
+
+select * from cursos;
+
+truncate table cursos; /* Exclui todos os dados da tabela cursos */
+
+select * from cursos;
+
+drop database escola;
