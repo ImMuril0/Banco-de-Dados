@@ -1,0 +1,45 @@
+create database AUTOMOVEL;
+
+use AUTOMOVEL;
+
+create table Cliente(
+codCliente int auto_increment,
+nome_cliente varchar(35),
+telefone_cliente varchar(30),
+endereco varchar(20),
+CNH varchar(50),
+PRIMARY KEY(codCliente)
+);
+
+create table Veiculo(
+codVeiculo int primary key auto_increment,
+modelo varchar(30),
+cor varchar(30),
+placa char(7),
+codCliente int,
+foreign key(codCliente) references Cliente(codCliente)
+);
+
+create table Caminhao(
+codCaminhao int primary key auto_increment,
+placa_caminhao char(7),
+modelo_caminhao varchar(30),
+cor_caminhao varchar(20)
+);
+
+create table Endereco(
+codEndereco int primary key auto_increment,
+Rua varchar(50),
+Bairro varchar(20),
+Cidade varchar(25),
+Estado varchar(20),
+Pais varchar(20)
+);
+
+alter table Cliente
+add codEndereco int;
+
+desc Cliente;
+
+alter table Cliente
+add foreign key(codEndereco) references Endereco(codEndereco);
