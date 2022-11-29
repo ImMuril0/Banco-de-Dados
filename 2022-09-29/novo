@@ -1,0 +1,54 @@
+drop database if exists funcionarioSimples;
+create database funcionarioSimples;
+use funcionarioSimples;
+
+create table funcionario(
+codFunc int not null auto_increment,
+priNome varchar(20),
+segNome varchar(20),
+ultNome varchar(20),
+dataNasc date,
+funcao varchar(20),
+salario decimal(7,2),
+primary key(codFunc)
+);
+
+insert into funcionario
+(codFunc, priNome, segNome, ultNome, dataNasc, funcao, salario)
+values
+(default,'Marcelo','Eduardo','Moraes','1979-07-19','Atendente','3768.00'),
+(default,'Carlos','Fernando','Oliveira','1982-09-22','Atendente','2894.35'),
+(default,'Joao','Fernando','Silva','1978-11-17','Almoxarife','8542.34');
+
+insert into funcionario
+(priNome, dataNasc, funcao, salario)
+values
+('Cristiano','1974-12-13','Almoxarife','7842.34');
+
+desc funcionario;
+
+select * from funcionario; #Seleciona todos os registros
+
+select priNome as NOME, 
+ultNome as SOBRENOME 
+from funcionario 
+order by ultNome; # Nome dos funcionários ordenados pelo último nome
+
+select priNome as NOME, segNome as SEGUNDO_NOME, ultNome as SOBRENOME from funcionario
+where salario > '3000'
+order by priNome; # Registro ordenados pelo primeiro nome
+
+select * from funcionario;
+
+select funcao as FUNÇÃO, count(*) as CONTAGEM from funcionario
+group by funcao; # Listagem de funcionários por função
+
+select dataNasc as DATA_NASCIMENTO, priNOme as NOME from funcionario
+order by dataNasc asc, priNome; # Ordem crescente de nascimento
+
+select dataNasc as DATA_NASCIMENTO, priNOme as NOME from funcionario
+order by dataNasc desc, priNome; # Ordem decrescente de nascimento
+
+select (count(priNome)) as CONTAGEM from funcionario
+where salario < '3000'; # Conta quantos funcionários ganham menos que R$ 3.000,00
+
