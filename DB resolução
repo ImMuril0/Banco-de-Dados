@@ -1,0 +1,92 @@
+create database Agencia;
+use Agencia;
+
+create table Departamentos(
+idDepart int primary key auto_increment not null,
+nomeDepart varchar(50) not null,
+localizacao varchar(50)
+);
+
+insert into Departamentos (idDepart, nomeDepart, localizacao) values
+(default, 'Comercial', 'Rua Gentil Batistti Archer'),
+(default, 'Marketing', 'Rua Germano Fischer'),
+(default, 'Financeiro', 'Rua Antônio Modesti Benvenutti');
+
+select  * from Departamentos;
+
+create table Funcionarios(
+idFunc int primary key auto_increment not null,
+priNome varchar(20) not null,
+segNome varchar(20),
+ultNome varchar(20),
+dataNasc date,
+CPF varchar(20),
+CEP varchar(20),
+cidade varchar(50),
+fone varchar(50),
+departamento int,
+funcao varchar(35),
+salario decimal(7,2),
+foreign key(departamento) references Departamentos(idDepart)
+);
+
+insert into Funcionarios (idFunc, priNome, segNome, ultNome, dataNasc, CPF, CEP, cidade, fone,departamento,funcao,salario) values
+(default, 'Rodrigo', 'Rocha ', 'Correia', '1974-06-26', '194.290.826-12', '07134-230', 'Guarulhos-SP', '(11) 5498-2761', '1','Gerente', '3500.00'),
+(default, 'Vitór ', 'Correia ', 'Barbosa', '1998-4-2', '711.774.814-13', '79076-172', 'Campo Grande-MS', '(67) 2457-4573', '2', 'Faxineiro','800.00'),
+(default, 'Laura ', 'Castro ', 'Almeida', '2000-7-24', '266.275.766-35', '26177-060', 'Belford Roxo-RJ', '(21) 2535-4421', '3', 'Gerente','3750.23');
+
+select  * from Funcionarios;
+
+alter table Departamentos
+add codGerente int,
+add foreign key(codGerente) references Funcionarios(idFunc);
+
+update Departamentos
+set codGerente = '1'
+where idDepart  = '1';
+
+update Departamentos
+set codGerente = '3'
+where idDepart = '2';
+
+alter table Funcionarios
+add RG varchar(50) after CPF;
+
+alter table Funcionarios
+add Endereco varchar(100) after RG;
+
+update Funcionarios
+set RG = '4.513.754', Endereco = 'Rua Antônio Pegorario'
+where idFunc = '1';
+
+update Funcionarios
+set RG = '6.216.489', Endereco = 'Rua Marcelo Hermes'
+where idFunc = '2';
+
+update Funcionarios
+set RG = '8.973.521', Endereco = 'Rua Edgar'
+where idFunc = '3';
+
+#Questão 3
+#Letra A da atividade
+select priNome as NOME, ultNome as SOBRENOME from Funcionarios
+order by ultNome;
+
+#Letra B da atividade
+select *from Funcionarios as Funcionario
+order by cidade;
+
+#Letra C da atividade
+select priNome as NOME, segNome AS SEGUNDO_NOME, ultNome AS SOBRENOME from
+Funcionarios
+where
+salario>'1000'
+order by priNome, segNome, ultNome;
+
+#Letra D da atividade
+select dataNasc as DATA_DE_NASCIMENTO, priNome as NOME from Funcionarios
+order by dataNasc desc, priNome;
+
+#Letra E da atividade
+select fone as TELEFONE, priNome as NOME from Funcionarios
+order by fone;
